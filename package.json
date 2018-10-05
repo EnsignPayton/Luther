@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build",
+    "build": "webpack",
+    "test": "jest --color"
   },
   "devDependencies": {
     "@types/jest": "^23.3.3",
