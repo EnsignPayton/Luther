@@ -31,3 +31,9 @@ Parsing method is to be determined
 Unit tests and production code will be developed concurrently through pseudo-TDD. Since I have never had any experience or formal training in TDD, I don't actually know if I'm doing it the right way. All I know is red-green-refactor.
 
 All code will be written in TypeScript using ES6-style modules. The final library output will be bundled using Webpack. Unit tests will be ran using Jest.
+
+## Subprojects
+
+### Dragon2
+
+This is an implementation of the basic infix-to-postfix arithmetic expression translater from chapter 2 of the "red dragon book".

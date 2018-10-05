@@ -14,7 +14,10 @@
     "noImplicitAny": true,
     "lib": [
       "esnext"
-    ]
+    ],
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": [
     "src/**/*.ts",
