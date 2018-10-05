@@ -9,8 +9,9 @@ const binops: string[] =
 
 export enum TokenType
 {
-  Number,
-  BinOp,
+  Number = 'number',
+  BinOp = 'binop',
+  Error = 'error',
 }
 
 export interface Token
@@ -32,6 +33,10 @@ export function lex(input: string): Token[]
     else if (binops.includes(char))
     {
       result.push({ type: TokenType.BinOp, val: char });
+    }
+    else
+    {
+      result.push({ type: TokenType.Error, val: char });
     }
 
     input = input.substr(1);

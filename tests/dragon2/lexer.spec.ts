@@ -44,4 +44,23 @@ describe('lex', () =>
     const actual = lex(input);
     expect(actual).toStrictEqual(expected);
   });
+
+  it('returns error for invalid', () =>
+  {
+    const input = '!';
+    const expected = [{ type: TokenType.Error, val: input[0] }];
+    const actual = lex(input);
+    expect(actual).toStrictEqual(expected);
+  });
+
+  it('continues past errors', () =>
+  {
+    const input = '!5';
+    const expected = [
+      { type: TokenType.Error, val: input[0] },
+      { type: TokenType.Number, val: input[1] },
+    ];
+    const actual = lex(input);
+    expect(actual).toStrictEqual(expected);
+  });
 });

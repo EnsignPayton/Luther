@@ -13,7 +13,8 @@
     "baseUrl": ".",
     "noImplicitAny": true,
     "lib": [
-      "esnext"
+      "esnext",
+      "dom"
     ],
     "paths": {
       "@/*": ["src/*"]
