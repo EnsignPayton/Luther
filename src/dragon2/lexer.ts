@@ -1,3 +1,5 @@
+import { Token, TokenType } from '@/dragon2/definitions';
+
 const numbers: string[] = [
   '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
 ];
@@ -6,19 +8,6 @@ const binops: string[] =
 [
   '+', '-',
 ];
-
-export enum TokenType
-{
-  Number = 'number',
-  BinOp = 'binop',
-  Error = 'error',
-}
-
-export interface Token
-{
-  type: TokenType;
-  val?: string;
-}
 
 export function lex(input: string): Token[]
 {

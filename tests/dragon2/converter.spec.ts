@@ -1,24 +1,16 @@
-import { parse, TokenType, Production, Node } from '@/dragon2';
+import { convert, TokenType, Production, Node } from '@/dragon2';
 
-describe('parse', () =>
+describe('convert', () =>
 {
   it('exists', () =>
   {
-    expect(parse).toBeDefined();
+    expect(convert).toBeDefined();
   });
 
-  // expr
-  // |   \
-  // |    \
-  // term  rest
-  // |     |
-  // 1     x
+  // 1
   it('handles single number', () =>
   {
-    const input = [
-      { type: TokenType.Number, val: '1' },
-    ];
-    const expected: Node =
+    const input: Node =
     {
       type: Production.Expr,
       children: [],
@@ -26,7 +18,7 @@ describe('parse', () =>
     const term: Node =
     {
       type: Production.Term,
-      parent: expected,
+      parent: input,
       children: [],
     };
     const value: Node =
@@ -39,41 +31,35 @@ describe('parse', () =>
     const rest: Node =
     {
       type: Production.Rest,
-      parent: expected,
+      parent: input,
       children: [],
     };
 
-    expected.children.push(term);
-    expected.children.push(rest);
+    input.children.push(term);
+    input.children.push(rest);
     term.children.push(value);
 
-    const actual = parse(input);
+    const expected: Node =
+    {
+      type: TokenType.Number,
+      data: '1',
+      children: [],
+    };
+
+    const actual = convert(input);
     expect(actual).toEqual(expected);
   });
 
-  // expr
-  // |   \
-  // |    \
-  // term  rest___
-  // |     |  |   \
-  // |     |  |    \
-  // 9     -  term  rest___
-  //          |     |  |   \
-  //          |     |  |    \
-  //          5     +  term  rest
-  //                   |     |
-  //                   |     |
-  //                   2     x
-  it('handles basic expression', () =>
+  //       +
+  //      / \
+  //     /   \
+  //    -     2
+  //   / \
+  //  /   \
+  // 9     5
+  it('handles simple expression', () =>
   {
-    const input = [
-      { type: TokenType.Number, val: '9' },
-      { type: TokenType.BinOp, val: '-' },
-      { type: TokenType.Number, val: '5' },
-      { type: TokenType.BinOp, val: '+' },
-      { type: TokenType.Number, val: '2' },
-    ];
-    const expected: Node =
+    const input: Node =
     {
       type: Production.Expr,
       children: [],
@@ -81,7 +67,7 @@ describe('parse', () =>
     const term1: Node =
     {
       type: Production.Term,
-      parent: expected,
+      parent: input,
       children: [],
     };
     const val1: Node =
@@ -94,7 +80,7 @@ describe('parse', () =>
     const rest1: Node =
     {
       type: Production.Rest,
-      parent: expected,
+      parent: input,
       children: [],
     };
     const op1: Node =
@@ -150,8 +136,8 @@ describe('parse', () =>
       children: [],
     };
 
-    expected.children.push(term1);
-    expected.children.push(rest1);
+    input.children.push(term1);
+    input.children.push(rest1);
     term1.children.push(val1);
     rest1.children.push(op1);
     rest1.children.push(term2);
@@ -162,7 +148,47 @@ describe('parse', () =>
     rest2.children.push(rest3);
     term3.children.push(val3);
 
-    const actual = parse(input);
+    const expected: Node =
+    {
+      type: TokenType.BinOp,
+      data: '+',
+      children: [],
+    };
+    const expMinus: Node =
+    {
+      type: TokenType.BinOp,
+      parent: expected,
+      data: '-',
+      children: [],
+    };
+    const exp2: Node =
+    {
+      type: TokenType.Number,
+      parent: expected,
+      data: '2',
+      children: [],
+    };
+    const exp9: Node =
+    {
+      type: TokenType.Number,
+      parent: expMinus,
+      data: '9',
+      children: [],
+    };
+    const exp5: Node =
+    {
+      type: TokenType.Number,
+      parent: expMinus,
+      data: '5',
+      children: [],
+    };
+
+    expected.children.push(expMinus);
+    expected.children.push(exp2);
+    expMinus.children.push(exp9);
+    expMinus.children.push(exp5);
+
+    const actual = convert(input);
     expect(actual).toEqual(expected);
   });
 });
