@@ -172,4 +172,40 @@ describe('parse', () =>
     const actual = parse(input);
     expect(actual).toEqual(expected);
   });
+
+  it('rejects double operators', () =>
+  {
+    const input = [
+      { type: TokenType.BinOp, val: '+' },
+      { type: TokenType.BinOp, val: '+' },
+    ];
+    expect(() => parse(input)).toThrow();
+  });
+
+  it('rejects double numbers', () =>
+  {
+    const input = [
+      { type: TokenType.Number, val: '1' },
+      { type: TokenType.Number, val: '1' },
+    ];
+    expect(() => parse(input)).toThrow();
+  });
+
+  it('rejects operator first', () =>
+  {
+    const input = [
+      { type: TokenType.BinOp, val: '+' },
+      { type: TokenType.Number, val: '1' },
+    ];
+    expect(() => parse(input)).toThrow();
+  });
+
+  it('rejects operator last', () =>
+  {
+    const input = [
+      { type: TokenType.Number, val: '1' },
+      { type: TokenType.BinOp, val: '+' },
+    ];
+    expect(() => parse(input)).toThrow();
+  });
 });
