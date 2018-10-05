@@ -1,4 +1,4 @@
-import { lex, Token, TokenType } from '@/dragon2/lexer';
+import { lex, Token, TokenType } from '@/dragon2';
 
 describe('lex', () =>
 {

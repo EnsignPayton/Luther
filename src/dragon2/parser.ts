@@ -1,19 +1,4 @@
-import { Token, TokenType } from '@/dragon2/lexer';
-
-export enum Production
-{
-  Expr = 'expr',
-  Rest = 'rest',
-  Term = 'term',
-}
-
-export interface Node
-{
-  type: Production | TokenType;
-  data?: any;
-  parent?: Node;
-  children: Node[];
-}
+import { Token, TokenType, Production, Node } from '@/dragon2/definitions';
 
 // Pseudo-constructor but we don't want a class
 function newNode(type: Production | TokenType, parent?: Node): Node
