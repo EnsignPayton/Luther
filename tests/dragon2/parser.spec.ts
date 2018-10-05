@@ -1,10 +1,17 @@
-import { parse, TokenType, Production, Node } from '@/dragon2';
+import { parse, Token, TokenType, Production, Node } from '@/dragon2';
 
 describe('parse', () =>
 {
   it('exists', () =>
   {
     expect(parse).toBeDefined();
+  });
+
+  it('handles empty', () =>
+  {
+    const input: Token[] = [];
+    const actual = parse(input);
+    expect(actual).toBeUndefined();
   });
 
   // expr

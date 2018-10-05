@@ -57,8 +57,13 @@ function postfixBinOp(node: Node)
   }
 }
 
-export function postfix(tree: Node): string
+export function postfix(tree?: Node): string
 {
+  if (!tree)
+  {
+    return '';
+  }
+
   result = [];
 
   if (tree.type === TokenType.BinOp)

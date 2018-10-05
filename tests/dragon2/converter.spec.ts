@@ -7,6 +7,13 @@ describe('convert', () =>
     expect(convert).toBeDefined();
   });
 
+  it('handles empty', () =>
+  {
+    const input = undefined;
+    const actual = convert(input);
+    expect(actual).toBeUndefined();
+  });
+
   // 1
   it('handles single number', () =>
   {

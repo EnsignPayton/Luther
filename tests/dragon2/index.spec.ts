@@ -20,6 +20,13 @@ describe('dragon2', () =>
     expect(postfix).toBeDefined();
   });
 
+  it('passes empty string through', () =>
+  {
+    const input = '';
+    const expected = '';
+    runTest(input, expected);
+  });
+
   it('passes a number straight through', () =>
   {
     const input = '1';
