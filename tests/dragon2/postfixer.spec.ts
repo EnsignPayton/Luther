@@ -7,6 +7,14 @@ describe('postfix', () =>
     expect(postfix).toBeDefined();
   });
 
+  it('handles empty', () =>
+  {
+    const input = undefined;
+    const expected = '';
+    const actual = postfix(input);
+    expect(actual).toBe(expected);
+  });
+
   it('handles single number', () =>
   {
     const input: Node =

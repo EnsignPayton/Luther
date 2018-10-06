@@ -35,8 +35,13 @@ function convertExpr(expr: Node): Node
   return convertRest(rest, value);
 }
 
-export function convert(tree: Node): Node
+export function convert(tree?: Node): Node | undefined
 {
+  if (!tree)
+  {
+    return undefined;
+  }
+
   if (tree.type === Production.Expr)
   {
     return convertExpr(tree);
